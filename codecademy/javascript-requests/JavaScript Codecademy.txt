@@ -1,0 +1,473 @@
+JavaScript Codecademy (https://www.codecademy.com/learn/introduction-to-javascript)
+
+OVERVIEW ======================================================
+Review
+Let’s take one more glance at the concepts we just learned:
+
+Data is printed, or logged, to the console, a panel that displays messages, with console.log().
+You can write single-line comments with // and multi-line comments between /* and */.
+There are 7 fundamental data types in JavaScript: strings, numbers, booleans, null, undefined, symbol, and object.
+Numbers are any number without quotes: 23.8879
+Strings are characters wrapped in single or double quotes: 'Sample String'
+The built-in arithmetic operators include +, -, *, /, and %.
+Objects, including instances of data types, can have properties, stored information. The properties are denoted with a . after the name of the object, for example: 'Hello'.length.
+Objects, including instances of data types, can have methods which perform actions. Methods are called by appending the object or instance with a period, the method name, and parentheses. For example: 'hello'.toUpperCase().
+We can access properties and methods by using the ., dot operator.
+Built-in objects, including Math, are collections of methods and properties that JavaScript provides.
+
+
+VARIABLES ======================================================
+Review Variables
+Let’s review what we learned:
+
+Variables hold reusable data in a program and associate it with a name.
+Variables are stored in memory.
+The var keyword is used in pre-ES6 versions of JS.
+let is the preferred way to declare a variable when it can be reassigned, and const is the preferred way to declare a variable with a constant value.
+Variables that have not been initialized store the primitive data type undefined.
+Mathematical assignment operators make it easy to calculate a new value and assign it to the same variable.
+The + operator is used to concatenate strings including string values held in variables
+In ES6, template literals use backticks ` and ${} to interpolate values into a string.
+The typeof keyword returns the data type (as a string) of a value.
+
+
+CONDITIONAL STATEMENTS ======================================================
+Review
+Way to go! Here are some of the major concepts for conditionals:
+
+An if statement checks a condition and will execute a task if that condition evaluates to true.
+if...else statements make binary decisions and execute different code blocks based on a provided condition.
+We can add more conditions using else if statements.
+Comparison operators, including <, >, <=, >=, ===, and !== can compare two values.
+The logical and operator, &&, or “and”, checks if both provided expressions are truthy.
+The logical operator ||, or “or”, checks if either provided expression is truthy.
+The bang operator, !, switches the truthiness and falsiness of a value.
+The ternary operator is shorthand to simplify concise if...else statements.
+A switch statement can be used to simplify the process of writing multiple else if statements. The break keyword stops the remaining cases from being checked and executed in a switch statement.
+
+
+FUNCTIONS ======================================================
+Review Functions
+Give yourself a pat on the back, you just navigated through functions!
+
+In this lesson, we covered some important concepts about functions:
+
+A function is a reusable block of code that groups together a sequence of statements to perform a specific task.
+
+A function declaration :
+
+	function greetWorld() {
+		console.log('Hello World');
+	};
+
+Diagram showing the syntax of a function declaration
+
+A parameter is a named variable inside a function’s block which will be assigned the value of the argument passed in when the function is invoked:
+
+	function calculateArea(width, height) {
+		console.log(width * height);
+	};
+
+JavaScript syntax for declaring a function with parameters
+
+To call a function in your code:
+
+	calculateArea(5, 4);
+
+Diagram showing the syntax of invoking a function
+
+ES6 introduces new ways of handling arbitrary parameters through default parameters which allow us to assign a default value to a parameter in case no argument is passed into the function.
+
+To return a value from a function, we use a return statement.
+
+To define a function using function expressions:
+
+	const calculateArea = function(width, height) {
+		area = width * height;
+		return area;
+	};
+
+defining a function expression
+
+To define a function using arrow function notation:
+
+	const calculateArea = (width, height) => {
+		area = width * height;
+		return area;
+	};
+
+Function definition can be made concise using concise arrow notation:
+
+Single-line block:
+
+	const sumNumbers = number => number + number;
+
+Multi-line block:
+
+	const sumNumbers = number => {
+		const sum = number + number;
+		return sum;
+	}
+
+comparing single line and multiline arrow functions
+
+It’s good to be aware of the differences between function expressions, arrow functions, and function declarations. As you program more in JavaScript, you’ll see a wide variety of how these function types are used.
+
+
+SCOPE ======================================================
+Review: Scope
+In this lesson, you learned about scope and how it impacts the accessibility of different variables.
+
+Let’s review the following terms:
+
+Scope is the idea in programming that some variables are accessible/inaccessible from other parts of the program.
+Blocks are statements that exist within curly braces {}.
+Global scope refers to the context within which variables are accessible to every part of the program.
+Global variables are variables that exist within global scope.
+Block scope refers to the context within which variables that are accessible only within the block they are defined.
+Local variables are variables that exist within block scope.
+Global namespace is the space in our code that contains globally scoped information.
+Scope pollution is when too many variables exist in a namespace or variable names are reused.
+As you continue your coding journey, remember to use best practices when declaring your variables! Scoping your variables tightly will ensure that your code has clean, organized, and modular logic.
+
+
+ARRAYS ======================================================
+Review Arrays
+Nice work! In this lesson, we learned these concepts regarding arrays:
+
+Arrays are lists that store data in JavaScript.
+Arrays are created with brackets [].
+Each item inside of an array is at a numbered position, or index, starting at 0.
+We can access one item in an array using its index, with syntax like: myArray[0].
+We can also change an item in an array using its index, with syntax like myArray[0] = 'new string';
+Arrays have a length property, which allows you to see how many items are in an array.
+Arrays have their own methods, including .push() and .pop(), which add and remove items from an array, respectively.
+Arrays have many methods that perform different tasks, such as .slice() and .shift(), you can find documentation at the Mozilla Developer Network website.
+Some built-in methods are mutating, meaning the method will change the array, while others are not mutating. You can always check the documentation.
+Variables that contain arrays can be declared with let or const. Even when declared with const, arrays are still mutable. However, a variable declared with const cannot be reassigned.
+Arrays mutated inside of a function will keep that change even outside the function.
+Arrays can be nested inside other arrays.
+To access elements in nested arrays chain indices using bracket notation.
+Learning how to work with and manipulate arrays will help you work with chunks of data!
+
+
+LOOPS ======================================================
+Review
+Great job! In this lesson, we learned how to write cleaner code with loops. You now know:
+
+Loops perform repetitive actions so we don’t have to code that process manually every time.
+How to write for loops with an iterator variable that increments or decrements
+How to use a for loop to iterate through an array
+A nested for loop is a loop inside another loop
+while loops allow for different types of stopping conditions
+Stopping conditions are crucial for avoiding infinite loops.
+do...while loops run code at least once— only checking the stopping condition after the first execution
+The break keyword allows programs to leave a loop during the execution of its block
+
+
+HIGHER-ORDER FUNCTIONS ======================================================
+Review
+Great job! By thinking about functions as data and learning about higher-order functions, you’ve taken important steps in being able to write clean, modular code and take advantage of JavaScript’s flexibility.
+
+Let’s review what we learned in this lesson:
+
+Abstraction allows us to write complicated code in a way that’s easy to reuse, debug, and understand for human readers
+
+We can work with functions the same way we would any other type of data including reassigning them to new variables
+
+JavaScript functions are first-class objects, so they have properties and methods like any object
+
+Functions can be passed into other functions as parameters
+
+A higher-order function is a function that either accepts functions as parameters, returns a function, or both
+
+
+ITERATORS ======================================================
+Review
+Awesome job on clearing the iterators lesson! You have learned a number of useful methods in this lesson as well as how to use the JavaScript documentation from the Mozilla Developer Network to discover and understand additional methods. Let’s review!
+
+.forEach() is used to execute the same code on every element in an array but does not change the array and returns undefined.
+.map() executes the same code on every element in an array and returns a new array with the updated elements.
+.filter() checks every element in an array to see if it meets certain criteria and returns a new array with the elements that return truthy for the criteria.
+.findIndex() returns the index of the first element of an array which satisfies a condition in the callback function. It returns -1 if none of the elements in the array satisfies the condition.
+.reduce() iterates through an array and takes the values of the elements and returns a single value.
+All iterator methods takes a callback function that can be pre-defined, or a function expression, or an arrow function.
+You can visit the Mozilla Developer Network to learn more about iterator methods (and all other parts of JavaScript!).
+
+
+OBJECTS ======================================================
+
+Objects store collections of key-value pairs.
+Each key-value pair is a property—when a property is a function it is known as a method.
+An object literal is composed of comma-separated key-value pairs surrounded by curly braces.
+You can access, add or edit a property within an object by using dot notation or bracket notation.
+We can add methods to our object literals using key-value syntax with anonymous function expressions as values or by using the new ES6 method syntax.
+We can navigate complex, nested objects by chaining operators.
+Objects are mutable—we can change their properties even when they’re declared with const.
+Objects are passed by reference— when we make changes to an object passed into a function, those changes are permanent.
+We can iterate through objects using the For...in syntax.
+
+
+ADVANCED OBJECTS ======================================================
+
+The object that a method belongs to is called the calling object.
+The this keyword refers the calling object and can be used to access properties of the calling object.
+
+Methods do not automatically have access to other internal properties of the calling object.
+The value of this depends on where the this is being accessed from.
+
+We cannot use arrow functions as methods if we want to access other internal properties.
+
+JavaScript objects do not have built-in privacy, rather there are conventions to follow to notify other developers about the intent of the code.
+The usage of an underscore before a property name means that the original developer did not intend for that property to be directly changed.
+
+Setters and getter methods allow for more detailed ways of accessing and assigning properties.
+
+Factory functions allow us to create object instances quickly and repeatedly.
+
+There are different ways to use object destructuring: one way is the property value shorthand and another is destructured assignment.
+As with any concept, it is a good skill to learn how to use the documentation with objects!
+
+
+CLASSES ======================================================
+
+Constructor
+
+In the last exercise, you created a class called Dog, and used it to produce a Dog object.
+
+Although you may see similarities between class and object syntax, there is one important method that sets them apart. It’s called the constructor method. JavaScript calls the constructor() method every time it creates a new instance of a class.
+
+class Dog {
+  constructor(name) {
+    this.name = name;
+    this.behavior = 0;
+  }
+}
+
+
+Instance
+
+Now, we’re ready to create class instances. An instance is an object that contains the property names and methods of a class, but with unique property values. Let’s look at our Dog class example.
+
+class Dog {
+  constructor(name) {
+    this.name = name;
+    this.behavior = 0;
+  } 
+}
+
+const halley = new Dog('Halley'); // Create new Dog instance
+console.log(halley.name); // Log the name value saved to halley
+// Output: 'Halley'
+
+
+Methods
+
+At this point, we have a Dog class that spins up objects with name and behavior properties. Below, we will add getters and a method to bring our class to life.
+
+Class method and getter syntax is the same as it is for objects except you can not include commas between methods.
+
+class Dog {
+  constructor(name) {
+    this._name = name;
+    this._behavior = 0;
+  }
+
+  get name() {
+    return this._name;
+  }
+
+  get behavior() {
+    return this._behavior;
+  }
+
+  incrementBehavior() {
+    this._behavior++;
+  }
+}
+
+
+Inheritance
+
+Imagine our doggy daycare is so successful that we decide to expand the business and open a kitty daycare. Before the daycare opens, we need to create a Cat class so we can quickly generate Cat instances.
+
+We’ve abstracted the shared properties and methods of our Cat and Dog classes into a parent class called Animal (See below).
+
+class Animal {
+  constructor(name) {
+    this._name = name;
+    this._behavior = 0;
+  }
+
+  get name() {
+    return this._name;
+  }
+
+  get behavior() {
+    return this._behavior;
+  }
+
+  incrementBehavior() {
+    this._behavior++;
+  }
+} 
+
+Now that we have these shared properties and methods in the parent Animal class, we can extend them to the subclass, Cat.
+
+class Cat extends Animal {
+  constructor(name, usesLitter) {
+    super(name);
+    this._usesLitter = usesLitter;
+  }
+}
+
+In the example above, we create a new class named Cat that extends the Animal class. Let’s pay special attention to our new keywords: extends and super.
+
+When we call extends in a class declaration, all of the parent methods are available to the child class.
+
+
+Static Methods
+
+Sometimes you will want a class to have methods that aren’t available in individual instances, but that you can call directly from the class.
+
+Take the Date class, for example — you can both create Date instances to represent whatever date you want, and call static methods, like Date.now() which returns the current date, directly from the class. The .now() method is static, so you can call it directly from the class, but not from an instance of the class.
+
+Let’s see how to use the static keyword to create a static method called generateName method in our Animal class:
+
+class Animal {
+  constructor(name) {
+    this._name = name;
+    this._behavior = 0;
+  }
+
+  static generateName() {
+    const names = ['Angel', 'Spike', 'Buffy', 'Willow', 'Tara'];
+    const randomNumber = Math.floor(Math.random()*5);
+    return names[randomNumber];
+  }
+} 
+
+
+Way to go! Let’s review what you learned.
+
+Classes are templates for objects.
+
+Javascript calls a constructor method when we create a new instance of a class.
+
+Inheritance is when we create a parent class with properties and methods that we can extend to child classes.
+
+We use the extends keyword to create a subclass.
+
+The super keyword calls the constructor() of a parent class.
+
+Static methods are called on the class, but not on instances of the class.
+
+ 
+MODULES ======================================================
+
+Modules in Node.js are reusable pieces of code that can be exported from one program and imported for use in another program.
+
+module.exports exports the module for use in another program.
+
+require() imports the module for use in the current program.
+
+ES6 introduced a more flexible, easier syntax to export modules:
+
+default exports use export default to export JavaScript objects, functions, and primitive data types.
+
+named exports use the export keyword to export data in variables.
+
+named exports can be aliased with the as keyword
+
+.import is a keyword that imports any object, function, or data type.
+
+
+PROMISES ======================================================
+
+Promises are JavaScript objects that represent the eventual result of an asynchronous operation.
+
+Promises can be in one of three states: pending, resolved, or rejected.
+
+A promise is settled if it is either resolved or rejected.
+
+We construct a promise by using the new keyword and passing an executor function to the Promise constructor method.
+
+setTimeout() is a Node function which delays the execution of a callback function using the event-loop.
+
+We use .then() with a success handler callback containing the logic for what should happen if a promise resolves.
+
+We use .catch() with a failure handler callback containing the logic for what should happen if a promise rejects.
+
+Promise composition enables us to write complex, asynchronous code that’s still readable. We do this by chaining multiple .then()‘s and .catch()‘s.
+
+To use promise composition correctly, we have to remember to return promises constructed within a .then().
+
+We should chain multiple promises rather than nesting them.
+
+To take advantage of concurrency, we can use Promise.all().
+
+
+ASYNC AWAIT ======================================================
+
+async...await is syntactic sugar built on native JavaScript promises and generators.
+
+We declare an async function with the keyword async.
+
+Inside an async function we use the await operator to pause execution of our function until an asynchronous action completes and the awaited promise is no longer pending.
+
+await returns the resolved value of the awaited promise.
+
+We can write multiple await statements to produce code that reads like synchronous code.
+
+We use try...catch statements within our async functions for error handling.
+
+We should still take advantage of concurrency by writing async functions that allow asynchronous actions to happen in concurrently whenever possible.
+
+
+REQUESTS ======================================================
+
+Review Requests I
+
+JavaScript is the language of the web because of its asynchronous capabilities. AJAX, which stands for Asynchronous JavaScript and XML, is a set of tools that are used together to take advantage of JavaScript’s asynchronous capabilities.
+
+There are many HTTP request methods, two of which are GET and POST.
+
+GET requests only request information from other sources.
+
+POST methods can introduce new information to other sources in addition to requesting it.
+
+GET requests can be written using an XMLHttpRequest object and vanilla JavaScript.
+
+POST requests can also be written using an XMLHttpRequest object and vanilla JavaScript.
+
+Writing GET and POST requests with XHR objects and vanilla JavaScript requires constructing the XHR object using new, setting the responseType, creating a function that will handle the response object, and opening and sending the request.
+
+To add a query string to a URL endpoint you can use ? and include a parameter.
+
+To provide additional parameters, use & and then include a key-value pair, joined by =.
+
+Determining how to correctly write the requests and how to properly implement them requires carefully reading the documentation of the API with which you’re working.
+
+
+REQUESTS II ======================================================
+
+Review Requests II
+Let’s recap on the concepts covered in the previous exercises:
+
+GET and POST requests can be created a variety of ways.
+
+Use AJAX to asynchronously request data from APIs. fetch() and async/await are new functionalities developed in ES6 (promises) and ES8 respectively.
+
+Promises are a new type of JavaScript object that represent data that will eventually be returned from a request.
+
+fetch() is a web API that can be used to create requests. fetch() will return promises.
+
+We can chain .then() methods to handle promises returned by fetch().
+
+The .json() method converts a returned promise to a JSON object.
+
+async is a keyword that is used to create functions that will return promises.
+
+await is a keyword that is used to tell a program to continue moving through the message queue while a promise resolves.
+
+await can only be used within functions declared with async.
