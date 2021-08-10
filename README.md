@@ -1,2 +1,1 @@
-# pluralsight
-Aggregate exercises and tests from Pluralsight courses 
+Aggregate exercises and tests from free/open courses 
