@@ -1,6 +1,6 @@
 package lectures.part1basics
 
-object callByValueVsByName extends App {
+object CallByValueOrByName extends App {
   def calledByValue(x: Long): Unit = {  // expresion x is evaluated before the call
     println("by value call: " + x)
     println("by value call: " + x)
