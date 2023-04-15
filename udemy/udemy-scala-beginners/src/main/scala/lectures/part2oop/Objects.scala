@@ -30,11 +30,14 @@ object Objects {
 
   // class functionality access
   println(Person.N_EYES)
+  // println(Person.greet())  // Error
+
   // instance functionality access
   println(gwen.greet())
+  // println(gwen.N_EYES)  // Error
 
   // factory method using apply syntatic sugar
-  val boobie = Person(gwen, joe)
+  val boobie: Person = Person(gwen, joe)
   println(boobie.greet())
 
 
