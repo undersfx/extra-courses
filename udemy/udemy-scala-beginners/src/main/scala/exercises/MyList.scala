@@ -1,6 +1,6 @@
 package exercises
 
-abstract class AbstractMyList {
+abstract class AbstractMyList[+A] {
   /*
     linked list implementation with the following methods
     - head: first element of the list
@@ -10,27 +10,29 @@ abstract class AbstractMyList {
     - toString: returns a string representation of the list
   */
 
-  def head: Int
-  def tail: AbstractMyList
+  def head: A
+  def tail: AbstractMyList[A]
   def isEmpty: Boolean
-  def add(n: Int): AbstractMyList
+  def add[B >: A](n: B): AbstractMyList[B]
   def printElements: String
   override def toString: String = s"[${printElements}]"
 }
 
-object NullObjectList extends AbstractMyList {
-  def head: Int = throw new NoSuchElementException()
-  def tail: MyList = throw new NoSuchElementException()
+object NullObjectList extends AbstractMyList[Nothing] {
+  def head: Nothing = throw new NoSuchElementException()
+  def tail: MyList[Nothing] = throw new NoSuchElementException()
   def isEmpty: Boolean = true
-  def add(n: Int): MyList = new MyList(n, NullObjectList)
+  def add[B >: Nothing](n: B): MyList[B] = new MyList(n, NullObjectList)
   def printElements: String = ""
 }
 
-class MyList(val head: Int, val tail: AbstractMyList) extends AbstractMyList {
+class MyList[+A](h: A, t: AbstractMyList[A]) extends AbstractMyList[A] {
+  def head: A = h
+  def tail: AbstractMyList[A] = t
   def isEmpty: Boolean = false
-  def add(n: Int): MyList = new MyList(n, this)
+  def add[B >: A](n: B): MyList[B] = new MyList(n, this)
   def printElements: String = {
-    val s = head.toString
+    val s = h.toString
 
     if (tail.isEmpty) s
     else s"$s, " + tail.printElements
@@ -38,11 +40,19 @@ class MyList(val head: Int, val tail: AbstractMyList) extends AbstractMyList {
 }
 
 object ListTest extends App {
-  val list = MyList(1, NullObjectList)
+  val list: MyList[Int] = MyList(1, NullObjectList)
 
   println(list.head)
   println(list.isEmpty)
   println(list.add(42).head)
   println(list.toString)
   println(list.add(42).toString)
+
+  val anotherList: MyList[String] = MyList("1", NullObjectList)
+
+  println(anotherList.head)
+  println(anotherList.isEmpty)
+  println(anotherList.add("42").head)
+  println(anotherList.toString)
+  println(anotherList.add("42").toString)
 }
