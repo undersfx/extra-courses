@@ -9,13 +9,16 @@ abstract class AbstractMyList[+A] {
     - add(int): returns a new list with this element added
     - toString: returns a string representation of the list
   */
-
   def head: A
   def tail: AbstractMyList[A]
   def isEmpty: Boolean
   def add[B >: A](n: B): AbstractMyList[B]
   def printElements: String
   override def toString: String = s"[${printElements}]"
+  def map[B](transformer: MyTransformer[A, B]): AbstractMyList[B]
+  def flatMap[B](transformer: MyTransformer[A, AbstractMyList[B]]): AbstractMyList[B]
+  def filter(predicate: MyPredicate[A]): AbstractMyList[A]
+  def ++[B >: A](list: AbstractMyList[B]): AbstractMyList[B]  // concatenation
 }
 
 object NullObjectList extends AbstractMyList[Nothing] {
@@ -24,6 +27,10 @@ object NullObjectList extends AbstractMyList[Nothing] {
   def isEmpty: Boolean = true
   def add[B >: Nothing](n: B): MyList[B] = new MyList(n, NullObjectList)
   def printElements: String = ""
+  def map[B](transformer: MyTransformer[Nothing, B]): AbstractMyList[B] = NullObjectList
+  def flatMap[B](transformer: MyTransformer[Nothing, AbstractMyList[B]]): AbstractMyList[B] = NullObjectList
+  def filter(predicate: MyPredicate[Nothing]): AbstractMyList[Nothing] = NullObjectList
+  def ++[B >: Nothing](list: AbstractMyList[B]): AbstractMyList[B] = list
 }
 
 class MyList[+A](h: A, t: AbstractMyList[A]) extends AbstractMyList[A] {
@@ -37,6 +44,26 @@ class MyList[+A](h: A, t: AbstractMyList[A]) extends AbstractMyList[A] {
     if (tail.isEmpty) s
     else s"$s, " + tail.printElements
   }
+  def map[B](transformer: MyTransformer[A, B]): AbstractMyList[B] =
+    new MyList(transformer.transform(h), t.map(transformer))
+
+  def flatMap[B](transformer: MyTransformer[A, AbstractMyList[B]]): AbstractMyList[B] =
+    transformer.transform(h) ++ t.flatMap(transformer)
+
+  def filter(predicate: MyPredicate[A]): AbstractMyList[A] =
+    if (predicate.test(h)) then MyList(h, t.filter(predicate))
+    else t.filter(predicate)
+
+  def ++[B >: A](list: AbstractMyList[B]): AbstractMyList[B] = new MyList(h, t ++ list)
+}
+
+
+trait MyPredicate[-T] {
+  def test(elem: T) : Boolean
+}
+
+trait MyTransformer[-A, B] {
+  def transform(elem: A): B
 }
 
 object ListTest extends App {
@@ -55,4 +82,20 @@ object ListTest extends App {
   println(anotherList.add("42").head)
   println(anotherList.toString)
   println(anotherList.add("42").toString)
+
+  val numbersList = MyList(1, MyList(2, MyList(3, NullObjectList)))
+
+  println(numbersList.filter(new MyPredicate[Int] {
+      override def test(elem: Int): Boolean = elem % 2 == 0
+    }).toString)
+
+  println(numbersList.map(new MyTransformer[Int, Int] {
+    override def transform(elem: Int): Int = elem * 2
+  }).toString)
+
+  println(list ++ numbersList)
+
+  println(numbersList.flatMap(new MyTransformer[Int, AbstractMyList[Int]] {
+    override def transform(elem: Int): AbstractMyList[Int] = new MyList(elem, new MyList(elem + 1, NullObjectList))
+  }).toString)
 }

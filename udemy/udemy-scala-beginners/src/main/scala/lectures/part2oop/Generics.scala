@@ -2,24 +2,24 @@ package lectures.part2oop
 
 object Generics extends App {
   // defining a generic typed class
-  class MyList[A] {
+  class MyExampleList[A] {
    // use the type A
-   def add[B >: A](element: B): MyList[B] = ???
+   def add[B >: A](element: B): MyExampleList[B] = ???
   }
 
   // using a generic typed class
-  val listOfIntegers: MyList[Int] = new MyList[Int]
-  val listOfStrings = new MyList[String]
+  val listOfIntegers: MyExampleList[Int] = new MyExampleList[Int]
+  val listOfStrings = new MyExampleList[String]
 
   // defining generic methods
-  object MyList {
-   def empty[A]: MyList[A] = {
-     MyList[A]
+  object MyExampleList {
+   def empty[A]: MyExampleList[A] = {
+     MyExampleList[A]
    }
   }
 
   // using a generic typed methods
-  val emptyListOfIntegers = MyList.empty[Int]
+  val emptyListOfIntegers = MyExampleList.empty[Int]
 
 
   // VARIANCE PROBLEM
