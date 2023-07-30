@@ -21,7 +21,7 @@ abstract class AbstractMyList[+A] {
   def ++[B >: A](list: AbstractMyList[B]): AbstractMyList[B]  // concatenation
 }
 
-object NullObjectList extends AbstractMyList[Nothing] {
+case object NullObjectList extends AbstractMyList[Nothing] {
   def head: Nothing = throw new NoSuchElementException()
   def tail: MyList[Nothing] = throw new NoSuchElementException()
   def isEmpty: Boolean = true
@@ -33,7 +33,7 @@ object NullObjectList extends AbstractMyList[Nothing] {
   def ++[B >: Nothing](list: AbstractMyList[B]): AbstractMyList[B] = list
 }
 
-class MyList[+A](h: A, t: AbstractMyList[A]) extends AbstractMyList[A] {
+case class MyList[+A](h: A, t: AbstractMyList[A]) extends AbstractMyList[A] {
   def head: A = h
   def tail: AbstractMyList[A] = t
   def isEmpty: Boolean = false
@@ -98,4 +98,8 @@ object ListTest extends App {
   println(numbersList.flatMap(new MyTransformer[Int, AbstractMyList[Int]] {
     override def transform(elem: Int): AbstractMyList[Int] = new MyList(elem, new MyList(elem + 1, NullObjectList))
   }).toString)
+
+  // after lecture 21 (case classes)
+  val anotherNumbersList = MyList(1, MyList(2, MyList(3, NullObjectList)))
+  println(numbersList == anotherNumbersList)
 }
