@@ -102,4 +102,9 @@ object ListTest extends App {
   // after lecture 21 (case classes)
   val anotherNumbersList = MyList(1, MyList(2, MyList(3, NullObjectList)))
   println(numbersList == anotherNumbersList)
+
+  // after lecture 25 (functions)
+   println(numbersList.filter((elem: Int) => elem % 2 == 0).toString)
+   println(numbersList.map((elem: Int) => elem * 2).toString)
+   println(numbersList.flatMap((elem: Int) => MyList(elem, MyList(elem + 1, NullObjectList))).toString)
 }
