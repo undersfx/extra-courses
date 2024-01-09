@@ -38,6 +38,10 @@ object WhatsAFunction extends App {
   val adder3: ((Int, Int) => Int) = (n: Int, m: Int) => n + m
   println(adder3(1, 2))
 
+  // Same as
+  val adder4: ((Int, Int) => Int) = _ + _
+  println(adder4(1, 2))
+
   // REMINDER: ALL SCALA FUNCTIONS ARE INSTANCES OF CLASSES
 
 
