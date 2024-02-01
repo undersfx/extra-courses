@@ -19,6 +19,10 @@ abstract class AbstractMyList[+A] {
   def flatMap[B](transformer: MyTransformer[A, AbstractMyList[B]]): AbstractMyList[B]
   def filter(predicate: MyPredicate[A]): AbstractMyList[A]
   def ++[B >: A](list: AbstractMyList[B]): AbstractMyList[B]  // concatenation
+  def foreach(f: A => Unit): Unit
+  def sort(f: (A, A) => Int): AbstractMyList[A]
+  def zipWith[B, C](list: AbstractMyList[B], zip: (A, B) => C): AbstractMyList[C]
+  def fold[B](start: B)(operator: (B, A) => B): B
 }
 
 case object NullObjectList extends AbstractMyList[Nothing] {
@@ -31,6 +35,12 @@ case object NullObjectList extends AbstractMyList[Nothing] {
   def flatMap[B](transformer: MyTransformer[Nothing, AbstractMyList[B]]): AbstractMyList[B] = NullObjectList
   def filter(predicate: MyPredicate[Nothing]): AbstractMyList[Nothing] = NullObjectList
   def ++[B >: Nothing](list: AbstractMyList[B]): AbstractMyList[B] = list
+  def foreach(f: Nothing => Unit): Unit = ()
+  def sort(f: (Nothing, Nothing) => Int): AbstractMyList[Nothing] = NullObjectList
+  def zipWith[B, C](list: AbstractMyList[B], zip: (Nothing, B) => C): AbstractMyList[C] =
+    if (!list.isEmpty) throw new RuntimeException("Lists do not have the same length")
+    else NullObjectList
+  def fold[B](start: B)(operator: (B, Nothing) => B): B = start
 }
 
 case class MyList[+A](h: A, t: AbstractMyList[A]) extends AbstractMyList[A] {
@@ -55,6 +65,26 @@ case class MyList[+A](h: A, t: AbstractMyList[A]) extends AbstractMyList[A] {
     else t.filter(predicate)
 
   def ++[B >: A](list: AbstractMyList[B]): AbstractMyList[B] = new MyList(h, t ++ list)
+  def foreach(f: A => Unit): Unit = {
+    f(head)
+    tail.foreach(f)
+  }
+  def sort(f: (A, A) => Int): AbstractMyList[A] = {
+    def insert(x: A, sortedList: AbstractMyList[A]): AbstractMyList[A] =
+      if (sortedList.isEmpty) then new MyList(x, NullObjectList)
+      else if (f(x, sortedList.head) <= 0) then new MyList(x, sortedList)
+      else new MyList(sortedList.head, insert(x, sortedList.tail))
+
+    val sortedTail = t.sort(f)
+    insert(h, sortedTail)
+  }
+  def zipWith[B, C](list: AbstractMyList[B], zip: (A, B) => C): AbstractMyList[C] = {
+    if (list.isEmpty) throw new RuntimeException("Lists do not have the same length")
+    else new MyList[C](zip(head, list.head), tail.zipWith(list.tail, zip))
+  }
+  def fold[B](start: B)(operator: (B, A) => B): B = {
+    t.fold(operator(start, h))(operator)
+  }
 }
 
 
@@ -107,4 +137,10 @@ object ListTest extends App {
    println(numbersList.filter((elem: Int) => elem % 2 == 0).toString)
    println(numbersList.map((elem: Int) => elem * 2).toString)
    println(numbersList.flatMap((elem: Int) => MyList(elem, MyList(elem + 1, NullObjectList))).toString)
+
+   // after lecture 26 (HOFs)
+   numbersList.foreach(x => println(s"${x} from for each"))
+   println(numbersList.sort((x, y) => y - x))
+   println(numbersList.zipWith[Int, Int](numbersList, _ + _))
+   println(numbersList.fold(0)(_ + _))
 }

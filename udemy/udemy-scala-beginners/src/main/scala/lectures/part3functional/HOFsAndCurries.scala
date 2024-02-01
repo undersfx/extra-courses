@@ -38,4 +38,45 @@ object HOFsAndCurries extends App {
 
   println(standardFormat(Math.PI))
   println(precisedFormat(Math.PI))
+
+
+  /* Exercices
+    1. Create the following methods in MyList
+      - foreach
+      - sort
+      - zipWith
+      - fold
+
+    2. Implement those functions:
+      toCurry(f: (Int, Int) => Int): (Int => Int => Int)
+      fromCurry(f: (Int => Int => Int)): (Int, Int) => Int
+  */
+
+  def toCurry(f: (Int, Int) => Int): (Int => Int => Int) =
+    (x: Int) => (y: Int) => f(x, y)
+
+  val curriedSum = toCurry(_ + _)
+  println(curriedSum(1)(2))
+
+  def fromCurry(f: (Int => Int => Int)): (Int, Int) => Int =
+    (x, y) => f(x)(y)
+
+  val revertedCurriedSum = fromCurry(curriedSum)
+  println(revertedCurriedSum(1, 2))
+
+  /*
+    3. Implement generic functions:
+      compose(f, g) => x => f(g(x))
+      andThen(f, g) => x => g(f(x))
+  */
+
+  def compose[A, B, C](f: B => C, g: A => B): A => C =
+    (x: A) => f(g(x))
+
+  def andThen[A, B, C](f: A => B, g: B => C): A => C =
+    (x: A) => g(f(x))
+
+  println(compose[Int, Int, Int](_ + 1, _ + 2)(0))
+  println(andThen[String, String, String](_ + " world", _ + "!")("hello"))
+
 }
