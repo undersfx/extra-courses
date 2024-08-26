@@ -134,13 +134,20 @@ object ListTest extends App {
   println(numbersList == anotherNumbersList)
 
   // after lecture 25 (functions)
-   println(numbersList.filter((elem: Int) => elem % 2 == 0).toString)
-   println(numbersList.map((elem: Int) => elem * 2).toString)
-   println(numbersList.flatMap((elem: Int) => MyList(elem, MyList(elem + 1, NullObjectList))).toString)
+  println(numbersList.filter((elem: Int) => elem % 2 == 0).toString)
+  println(numbersList.map((elem: Int) => elem * 2).toString)
+  println(numbersList.flatMap((elem: Int) => MyList(elem, MyList(elem + 1, NullObjectList))).toString)
 
-   // after lecture 26 (HOFs)
-   numbersList.foreach(x => println(s"${x} from for each"))
-   println(numbersList.sort((x, y) => y - x))
-   println(numbersList.zipWith[Int, Int](numbersList, _ + _))
-   println(numbersList.fold(0)(_ + _))
+  // after lecture 26 (HOFs)
+  numbersList.foreach(x => println(s"${x} from for each"))
+  println(numbersList.sort((x, y) => y - x))
+  println(numbersList.zipWith[Int, Int](numbersList, _ + _))
+  println(numbersList.fold(0)(_ + _))
+
+  // for comprehensions
+  val comp = for {
+    a <- numbersList
+    b <- anotherNumbersList
+  } yield a + b
+  println(comp)
 }
