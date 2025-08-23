@@ -87,7 +87,9 @@ object TuplesAndMaps extends App {
       SocialNetwork(this.population + pNewPair + fNewPair)
     }
 
-    def numberOfFriends(p: String): Int = this.population(p).size
+    def numberOfFriends(p: String): Int =
+      if (!this.population.contains(p)) 0
+      else this.population(p).size
 
     def mostFriends: String = {
       this.population.reduce(
