@@ -105,17 +105,17 @@ object TuplesAndMaps extends App {
     }
 
     def connectionBetween(p: String, f: String): Boolean = {
-      def inner(current: String, pf: List[String], f: String, visited: List[String]): Boolean = {
+      def inner(current: String, pf: List[String], visited: List[String]): Boolean = {
         if (pf.isEmpty) false
         else if (pf.contains(f)) true
         else {
           pf.exists(next =>
-            inner(next, this.population(next).filterNot(visited.contains), f, visited :+ current)
+            inner(next, this.population(next).filterNot(visited.contains), visited :+ current)
           )
         }
       }
 
-      inner(p, this.population(p), f, List())
+      inner(p, this.population(p), List())
     }
   }
 
