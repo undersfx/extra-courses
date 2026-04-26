@@ -31,13 +31,17 @@ object Options extends App {
   println(betterChainedResult1)
   println(betterChainedResult2)
 
+  val myNullOption: Option[Int] = None
+
   // Option API
-  println("get:           " + myFistOption.get) // DO NOT USE: UNSAFE !!! Nulls will raise exception
+  println("get:           " + myFistOption.get) // DO NOT USE, UNSAFE!!! Nulls will raise exception (e.g. myNullOption.get)
+  println("getOrElse:     " + myFistOption.getOrElse(6))
+  println("getOrElse:     " + myNullOption.getOrElse(6)) // Safe Access
   println("isEmpty:       " + myFistOption.isEmpty) // Useful test for validations
   println("map:           " + myFistOption.map(_ * 2))
   println("flatMap:       " + myFistOption.flatMap(x => Option(x * 10)))
   println("filter(true):  " + myFistOption.filter(_ < 10))
   println("filter(false): " + myFistOption.filter(_ > 10)) // :O  -> Turns Some(5) into None (5 is not > 10)
 
-  
+
 }
